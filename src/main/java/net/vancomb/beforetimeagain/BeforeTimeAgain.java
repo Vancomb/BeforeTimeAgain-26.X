@@ -1,5 +1,10 @@
 package net.vancomb.beforetimeagain;
 
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.vancomb.beforetimeagain.creativetab.ModCreativeModeTabs;
+import net.vancomb.beforetimeagain.entity.ModEntities;
+import net.vancomb.beforetimeagain.entity.custom.DodoEntity;
+import net.vancomb.beforetimeagain.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -31,6 +36,10 @@ public class BeforeTimeAgain {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModCreativeModeTabs.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
+
         NeoForge.EVENT_BUS.register(this);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -44,7 +53,11 @@ public class BeforeTimeAgain {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.ZIRCON);
+            event.accept(ModItems.RAW_ZIRCON);
 
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -52,4 +65,5 @@ public class BeforeTimeAgain {
     public void onServerStarting(ServerStartingEvent event) {
 
     }
+
 }

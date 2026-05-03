@@ -1,13 +1,7 @@
 {
-  "itemGroup.beforetimeagain": "Example Mod Tab",
-  "block.beforetimeagain.example_block": "Example Block",
-  "item.beforetimeagain.example_item": "Example Item",
+"item.beforetimeagain.zircon": "Zircon",
+"item.beforetimeagain.raw_zircon": "Raw Zircon",
 
-  "beforetimeagain.configuration.title": "Before Time Again Configs",
-  "beforetimeagain.configuration.section.beforetimeagain.common.toml": "Before Time Again Configs",
-  "beforetimeagain.configuration.section.beforetimeagain.common.toml.title": "Before Time Again Configs",
-  "beforetimeagain.configuration.items": "Item List",
-  "beforetimeagain.configuration.logDirtBlock": "Log Dirt Block",
-  "beforetimeagain.configuration.magicNumberIntroduction": "Magic Number Text",
-  "beforetimeagain.configuration.magicNumber": "Magic Number"
+  "creativetab.beforetimeagain.before_time_again": "Before Time Again",
+
 }
