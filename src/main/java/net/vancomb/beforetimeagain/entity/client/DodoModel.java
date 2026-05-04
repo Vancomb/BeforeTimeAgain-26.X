@@ -126,10 +126,11 @@ public class DodoModel extends EntityModel<DodoRenderState> {
     @Override
     public void setupAnim(DodoRenderState state) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.applyHeadRotation(state.yRot, state.xRot);
 
         this.walkingAnimation.applyWalk(state.walkAnimationPos, state.walkAnimationSpeed, 2f, 2.5f);
         this.idlingAnimation.apply(state.idleAnimationState, state.ageInTicks, 1f);
+
+        this.applyHeadRotation(state.yRot, state.xRot);
 
     }
 
@@ -137,8 +138,8 @@ public class DodoModel extends EntityModel<DodoRenderState> {
         headYaw = Mth.clamp(headYaw, -30f, 30f);
         headPitch = Mth.clamp(headPitch, -25f, 45);
 
-        this.head.yRot = headYaw * ((float)Math.PI / 180f);
-        this.head.xRot = headPitch * ((float)Math.PI / 180f);
+        this.head.yRot += headYaw * ((float)Math.PI / 180f);
+        this.head.xRot += headPitch * ((float)Math.PI / 180f);
 
     }
 

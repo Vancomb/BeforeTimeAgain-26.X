@@ -28,9 +28,9 @@ public class DodoEntity extends PathfinderMob {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new PanicGoal(this, 2d));
         goalSelector.addGoal(2, new TemptGoal(this, 1.25d,stack -> stack.is(ItemTags.FISHES), false));
-        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));
-        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 1f));
-        goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+       // goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));
+       // goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5f, 0.2f));
+       // goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 
 
         super.registerGoals();
@@ -41,7 +41,8 @@ public class DodoEntity extends PathfinderMob {
         return PathfinderMob.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10d)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
-                .add(Attributes.TEMPT_RANGE, 16d);
+                .add(Attributes.TEMPT_RANGE, 16d)
+                .add(Attributes.FOLLOW_RANGE, 16d);
 
     }
 
