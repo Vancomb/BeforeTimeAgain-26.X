@@ -11,11 +11,11 @@ import net.vancomb.beforetimeagain.entity.custom.DodoEntity;
 
 public class DodoRenderer extends MobRenderer<DodoEntity, DodoRenderState, DodoModel> {
     public DodoRenderer(EntityRendererProvider.Context context) {
-        super(context, new DodoModel(context.bakeLayer(ModModelLayerLocations.DODO)), .85f);
+        super(context, new DodoModel(context.bakeLayer(ModModelLayerLocations.DODO)), 0.85f);
     }
 
     @Override
-    public Identifier getTextureLocation(DodoRenderState dodoRenderState) {
+    public Identifier getTextureLocation(DodoRenderState state) {
         return Identifier.fromNamespaceAndPath(BeforeTimeAgain.MOD_ID, "textures/entity/dodo/dodo.png");
     }
 

@@ -9,9 +9,7 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -36,7 +34,8 @@ public class BeforeTimeAgain {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        ModCreativeModeTabs.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus); //Creative Tab
+
         ModItems.register(modEventBus);
         ModEntities.register(modEventBus);
 
@@ -51,7 +50,7 @@ public class BeforeTimeAgain {
 
     }
 
-    // Add the example block item to the building blocks tab
+    // How to add to MC tabs
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.ZIRCON);

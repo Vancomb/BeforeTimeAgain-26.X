@@ -34,6 +34,7 @@ public class BeforeTimeAgainClient {
 
     }
 
+    @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayerLocations.DODO, DodoModel::createBodyLayer);
     }
