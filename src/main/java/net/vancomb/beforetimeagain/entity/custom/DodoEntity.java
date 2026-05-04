@@ -14,6 +14,8 @@ public class DodoEntity extends PathfinderMob {
 
     //Idle Animations
     public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState swimAnimationState = new AnimationState();
+    public final AnimationState runAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
 
@@ -28,9 +30,9 @@ public class DodoEntity extends PathfinderMob {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new PanicGoal(this, 2d));
         goalSelector.addGoal(2, new TemptGoal(this, 1.25d,stack -> stack.is(ItemTags.FISHES), false));
-       // goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));
-       // goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5f, 0.2f));
-       // goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));
+        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5f, 0.2f));
+        goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 
 
         super.registerGoals();
@@ -56,12 +58,33 @@ public class DodoEntity extends PathfinderMob {
     }
 
     private void setupAnimationStates() {
+        this.idleAnimationState.startIfStopped(this.tickCount);
+
+        //...but if it's in water, swim instead.
+        if (this.isInWater()) {
+            this.idleAnimationState.stop();
+            this.swimAnimationState.startIfStopped(this.tickCount);
+        }
+        //...or if it's panicking, run.
+        else if (this.isPanicking()) {
+            this.idleAnimationState.stop();
+            this.runAnimationState.startIfStopped(this.tickCount);
+        }
+        else {
+            this.swimAnimationState.stop();
+            this.runAnimationState.stop();
+        }
+    }
+}
+
+/*
+   private void setupAnimationStates() {
         if(this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 30;
+            this.idleAnimationTimeout = 200;
             this.idleAnimationState.start(this.tickCount); //Come back to this
         } else {
             this.idleAnimationTimeout--;
 
         }
     }
-}
+ */

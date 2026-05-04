@@ -40,5 +40,7 @@ public class DodoRenderer extends MobRenderer<DodoEntity, DodoRenderState, DodoM
     public void extractRenderState(DodoEntity entity, DodoRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
         state.idleAnimationState.copyFrom(entity.idleAnimationState);
+        state.swimAnimationState.copyFrom(entity.swimAnimationState);
+        state.runAnimationState.copyFrom(entity.runAnimationState);
     }
 }
