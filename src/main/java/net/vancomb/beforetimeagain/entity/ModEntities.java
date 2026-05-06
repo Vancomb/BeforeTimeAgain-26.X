@@ -16,12 +16,13 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.createEntities(BeforeTimeAgain.MOD_ID);
 
+    //DODO
+
     public static final ResourceKey<EntityType<?>> DODO_KEY = ResourceKey.create(Registries.ENTITY_TYPE,
             Identifier.fromNamespaceAndPath(BeforeTimeAgain.MOD_ID, "dodo"));
 
     public static final Supplier<EntityType<DodoEntity>> DODO = ENTITY_TYPES.register("dodo",
             () -> EntityType.Builder.of(DodoEntity::new, MobCategory.CREATURE).sized(0.75f, 1.25f).build(DODO_KEY));
-
 
 
     public static void register(IEventBus eventBus) {

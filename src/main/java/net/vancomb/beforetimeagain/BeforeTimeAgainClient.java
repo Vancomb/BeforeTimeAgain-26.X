@@ -9,12 +9,15 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.vancomb.beforetimeagain.entity.ModEntities;
 import net.vancomb.beforetimeagain.entity.client.DodoModel;
 import net.vancomb.beforetimeagain.entity.client.DodoRenderer;
 import net.vancomb.beforetimeagain.entity.client.ModModelLayerLocations;
+import net.vancomb.beforetimeagain.particle.DodoParticle;
+import net.vancomb.beforetimeagain.particle.ModParticles;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = BeforeTimeAgain.MOD_ID, dist = Dist.CLIENT)
@@ -37,6 +40,11 @@ public class BeforeTimeAgainClient {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayerLocations.DODO, DodoModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(ModParticles.DODO_PARTICLES.get(), DodoParticle.Provider::new);
     }
 
 }

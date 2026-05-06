@@ -11,7 +11,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
  * @author Author
  */
 public class DodoAnimations {
-	public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(1.7143F).looping()
+	public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(1.7F).looping()
 		.addAnimation("chest", new AnimationChannel(AnimationChannel.Targets.SCALE,
 			new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
 			new Keyframe(0.8571F, KeyframeAnimations.scaleVec(1.05F, 1.05F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),

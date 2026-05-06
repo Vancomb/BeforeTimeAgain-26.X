@@ -30,6 +30,7 @@ public class DodoModel extends EntityModel<DodoRenderState> {
     private final KeyframeAnimation idlingAnimation;
     private final KeyframeAnimation swimmingAnimation;
     private final KeyframeAnimation runningAnimation;
+    private final KeyframeAnimation screamingAnimation;
 
     public DodoModel(ModelPart root) {
         super(root);
@@ -55,6 +56,7 @@ public class DodoModel extends EntityModel<DodoRenderState> {
         idlingAnimation = DodoAnimations.IDLE.bake(root);
         swimmingAnimation = DodoAnimations.SWIM.bake(root);
         runningAnimation = DodoAnimations.RUN.bake(root);
+        screamingAnimation = DodoAnimations.SCREAM.bake(root);
 
 
     }
@@ -135,6 +137,7 @@ public class DodoModel extends EntityModel<DodoRenderState> {
         this.idlingAnimation.apply(state.idleAnimationState, state.ageInTicks, 1f);
         this.swimmingAnimation.apply(state.swimAnimationState, state.ageInTicks, 1f);
         this.runningAnimation.apply(state.runAnimationState, state.ageInTicks, 1f);
+        this.screamingAnimation.apply(state.screamAnimationState, state.ageInTicks, 1f);
 
 
         this.applyHeadRotation(state.yRot, state.xRot);

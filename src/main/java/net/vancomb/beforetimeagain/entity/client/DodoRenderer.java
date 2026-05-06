@@ -42,5 +42,6 @@ public class DodoRenderer extends MobRenderer<DodoEntity, DodoRenderState, DodoM
         state.idleAnimationState.copyFrom(entity.idleAnimationState);
         state.swimAnimationState.copyFrom(entity.swimAnimationState);
         state.runAnimationState.copyFrom(entity.runAnimationState);
+        state.screamAnimationState.copyFrom(entity.screamAnimationState);
     }
 }

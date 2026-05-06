@@ -1,68 +1,78 @@
 package net.vancomb.beforetimeagain;
 
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.vancomb.beforetimeagain.creativetab.ModCreativeModeTabs;
-import net.vancomb.beforetimeagain.entity.ModEntities;
-import net.vancomb.beforetimeagain.entity.custom.DodoEntity;
-import net.vancomb.beforetimeagain.item.ModItems;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.vancomb.beforetimeagain.creativetab.ModCreativeModeTabs;
+import net.vancomb.beforetimeagain.entity.ModEntities;
+import net.vancomb.beforetimeagain.item.ModItems;
+import net.vancomb.beforetimeagain.particle.ModParticles;
+import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
+import com.mojang.logging.LogUtils;
+
+/** MAIN MOD CLASS */
 @Mod(BeforeTimeAgain.MOD_ID)
 public class BeforeTimeAgain {
-    // Define mod id in a common place for everything to reference
+
+    // MOD ID must match mods.toml
     public static final String MOD_ID = "beforetimeagain";
-    // Directly reference a slf4j logger
+
+    // Logger = prints info/errors to console for debugging
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public BeforeTimeAgain(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
+
+        /* =============================
+           SETUP / LIFECYCLE EVENTS
+           ============================= */
         modEventBus.addListener(this::commonSetup);
-
-        ModCreativeModeTabs.register(modEventBus); //Creative Tab
-
-        ModItems.register(modEventBus);
-        ModEntities.register(modEventBus);
-
-        NeoForge.EVENT_BUS.register(this);
-        // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
+
+        /* =============================
+           REGISTER MOD CONTENT
+           ============================= */
+        ModCreativeModeTabs.register(modEventBus); // creative tab
+        ModItems.register(modEventBus);            // items
+        ModEntities.register(modEventBus);         // entities (mobs)
+        ModParticles.register(modEventBus);        // particles
+
+        /* =============================
+           EVENT BUS (global game events)
+           ============================= */
+        NeoForge.EVENT_BUS.register(this);
+
+        /* =============================
+           CONFIG FILE SETUP
+           ============================= */
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+    /** Runs once during mod setup. Good for networking, registries, or early initialization.*/
     private void commonSetup(FMLCommonSetupEvent event) {
-
+        // currently empty
     }
 
-    // How to add to MC tabs
+    /** Adds items to vanilla creative tabs.This is where you decide where your items show up in inventory.*/
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+
+        // Only modify the INGREDIENTS tab
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.ZIRCON);
             event.accept(ModItems.RAW_ZIRCON);
-
         }
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
+    /** Server startup event (runs when you launch a dedicated server)*/
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-
+        // currently empty
     }
-
 }

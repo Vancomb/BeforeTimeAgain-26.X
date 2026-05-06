@@ -7,5 +7,6 @@ public class DodoRenderState extends LivingEntityRenderState {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState runAnimationState = new AnimationState();
+    public final AnimationState screamAnimationState = new AnimationState();
 
 }

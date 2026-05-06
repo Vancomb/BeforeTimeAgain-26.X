@@ -1,7 +1,8 @@
 {
-"item.beforetimeagain.zircon": "Zircon",
-"item.beforetimeagain.raw_zircon": "Raw Zircon",
-
-  "creativetab.beforetimeagain.before_time_again": "Before Time Again"
+  "item.beforetimeagain.zircon": "Zircon",
+  "item.beforetimeagain.raw_zircon": "Raw Zircon",
+  "item.beforetimeagain.dodo_spawn_egg": "Dodo Spawn Egg",
+  "creativetab.beforetimeagain.before_time_again": "Before Time Again",
+  "entity.beforetimeagain.dodo": "Dodo"
 
 }
