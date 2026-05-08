@@ -65,8 +65,7 @@ public class BeforeTimeAgain {
 
         // Only modify the INGREDIENTS tab
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.ZIRCON);
-            event.accept(ModItems.RAW_ZIRCON);
+
         }
     }
 

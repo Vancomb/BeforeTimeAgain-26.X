@@ -17,12 +17,13 @@ public class ModCreativeModeTabs {
 
 
     public static final Supplier<CreativeModeTab> BEFORE_TIME_AGAIN_TAB = CREATIVE_MODE_TABS.register("before_time_again_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ZIRCON.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.DODO_SPAWN_EGG.get()))
                     .title(Component.translatable("creativetab.beforetimeagain.before_time_again"))
                     .displayItems((itemDisplayParameters, output) -> {
-                      output.accept(ModItems.ZIRCON);
-                      output.accept(ModItems.RAW_ZIRCON);
                       output.accept(ModItems.DODO_SPAWN_EGG);
+                      output.accept(ModItems.RAW_DODO_MEAT);
+                      output.accept(ModItems.COOKED_DODO_MEAT);
+                      output.accept(ModItems.DODO_FOSSIL);
 
 
                     }).build());

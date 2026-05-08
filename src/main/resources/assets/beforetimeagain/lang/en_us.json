@@ -1,8 +1,15 @@
 {
   "item.beforetimeagain.zircon": "Zircon",
   "item.beforetimeagain.raw_zircon": "Raw Zircon",
+
+
+  "entity.beforetimeagain.dodo": "Dodo",
   "item.beforetimeagain.dodo_spawn_egg": "Dodo Spawn Egg",
-  "creativetab.beforetimeagain.before_time_again": "Before Time Again",
-  "entity.beforetimeagain.dodo": "Dodo"
+  "item.beforetimeagain.raw_dodo_meat": "Raw Dodo Meat",
+  "item.beforetimeagain.cooked_dodo_meat": "Cooked Dodo Meat",
+  "item.beforetimeagain.dodo_fossil": "Dodo Fossil",
+
+  "creativetab.beforetimeagain.before_time_again": "Before Time Again"
+
 
 }

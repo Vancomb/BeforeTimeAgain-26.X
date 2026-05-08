@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "beforetimeagain:item/raw_zircon"
+    "layer0": "beforetimeagain:item/dodo_fossil"
   }
 }

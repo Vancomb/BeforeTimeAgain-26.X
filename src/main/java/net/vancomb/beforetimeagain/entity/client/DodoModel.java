@@ -31,6 +31,13 @@ public class DodoModel extends EntityModel<DodoRenderState> {
     private final KeyframeAnimation swimmingAnimation;
     private final KeyframeAnimation runningAnimation;
     private final KeyframeAnimation screamingAnimation;
+    private final KeyframeAnimation sittingDownAnimation;   // for DOWN
+    private final KeyframeAnimation restingAnimation;       // for REST
+
+    private final KeyframeAnimation fallingAsleepAnimation;
+    private final KeyframeAnimation sleepingAnimation;      // for SLEEP
+    private final KeyframeAnimation wakingUpAnimation;      // for WAKE_UP
+    private final KeyframeAnimation standingUpAnimation;    // for UP
 
     public DodoModel(ModelPart root) {
         super(root);
@@ -57,6 +64,14 @@ public class DodoModel extends EntityModel<DodoRenderState> {
         swimmingAnimation = DodoAnimations.SWIM.bake(root);
         runningAnimation = DodoAnimations.RUN.bake(root);
         screamingAnimation = DodoAnimations.SCREAM.bake(root);
+
+        sittingDownAnimation = DodoAnimations.DOWN.bake(root);
+        restingAnimation = DodoAnimations.REST.bake(root);
+
+        fallingAsleepAnimation = DodoAnimations.FALL_ASLEEP.bake(root);
+        sleepingAnimation = DodoAnimations.SLEEP.bake(root);
+        wakingUpAnimation = DodoAnimations.WAKE_UP.bake(root);
+        standingUpAnimation = DodoAnimations.UP.bake(root);
 
 
     }
@@ -138,6 +153,14 @@ public class DodoModel extends EntityModel<DodoRenderState> {
         this.swimmingAnimation.apply(state.swimAnimationState, state.ageInTicks, 1f);
         this.runningAnimation.apply(state.runAnimationState, state.ageInTicks, 1f);
         this.screamingAnimation.apply(state.screamAnimationState, state.ageInTicks, 1f);
+
+        this.sittingDownAnimation.apply(state.downAnimationState, state.ageInTicks, 1f);
+        this.restingAnimation.apply(state.restAnimationState, state.ageInTicks, 1f);
+
+        this.fallingAsleepAnimation.apply(state.fallSleepAnimationState, state.ageInTicks, 1f);
+        this.sleepingAnimation.apply(state.sleepAnimationState, state.ageInTicks, 1f);
+        this.wakingUpAnimation.apply(state.wakeUpAnimationState, state.ageInTicks, 1f);
+        this.standingUpAnimation.apply(state.upAnimationState, state.ageInTicks, 1f);
 
 
         this.applyHeadRotation(state.yRot, state.xRot);

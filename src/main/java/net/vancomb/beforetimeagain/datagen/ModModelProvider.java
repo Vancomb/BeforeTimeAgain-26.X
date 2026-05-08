@@ -16,9 +16,10 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        itemModels.generateFlatItem(ModItems.ZIRCON.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.RAW_ZIRCON.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.DODO_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_DODO_MEAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.COOKED_DODO_MEAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.DODO_FOSSIL.get(), ModelTemplates.FLAT_ITEM);
 
     }
 }

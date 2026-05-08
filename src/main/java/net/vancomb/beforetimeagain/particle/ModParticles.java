@@ -1,7 +1,6 @@
 package net.vancomb.beforetimeagain.particle;
 
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +15,10 @@ public class ModParticles {
 
     public static final Supplier<SimpleParticleType> DODO_PARTICLES =
             PARTICLE_TYPES.register("dodo_particles", () -> new SimpleParticleType(true));
+
+    // ADDED: Register sleep particles
+    public static final Supplier<SimpleParticleType> SLEEP_PARTICLES =
+            PARTICLE_TYPES.register("sleep_particles", () -> new SimpleParticleType(true));
 
     public static void register(IEventBus eventBus) {
         PARTICLE_TYPES.register(eventBus);

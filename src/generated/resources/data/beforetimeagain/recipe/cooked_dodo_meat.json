@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": "beforetimeagain:raw_dodo_meat",
+  "result": {
+    "id": "beforetimeagain:cooked_dodo_meat"
+  }
+}

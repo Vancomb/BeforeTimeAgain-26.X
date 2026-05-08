@@ -18,6 +18,7 @@ import net.vancomb.beforetimeagain.entity.client.DodoRenderer;
 import net.vancomb.beforetimeagain.entity.client.ModModelLayerLocations;
 import net.vancomb.beforetimeagain.particle.DodoParticle;
 import net.vancomb.beforetimeagain.particle.ModParticles;
+import net.vancomb.beforetimeagain.particle.SleepParticle;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = BeforeTimeAgain.MOD_ID, dist = Dist.CLIENT)
@@ -45,6 +46,8 @@ public class BeforeTimeAgainClient {
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ModParticles.DODO_PARTICLES.get(), DodoParticle.Provider::new);
+        event.registerSpriteSet(ModParticles.SLEEP_PARTICLES.get(), SleepParticle.Provider::new); //ADDED
+
     }
 
 }
