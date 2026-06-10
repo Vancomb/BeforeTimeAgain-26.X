@@ -10,16 +10,18 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.chicken.ChickenSoundVariants;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -38,7 +40,7 @@ import org.jspecify.annotations.Nullable;
  * - Occasionally sits down → rests → falls asleep → wakes up → stands back up
  * - Anything hits it while sleeping = instantly awake so it can flee
  */
-public class DodoEntity extends PathfinderMob {
+public class DodoEntity extends Animal {
 
     // ===========================================================
     // SYNCED ENTITY DATA
@@ -75,32 +77,33 @@ public class DodoEntity extends PathfinderMob {
     // a fixed time (the *_DURATION constants). Others are open-ended and
     // wait for a random roll (RESTING, SLEEPING — see CHANCE_* constants).
 
-    public static final int PHASE_AWAKE = 0;
+    public static final int PHASE_AWAKE        = 0;
     public static final int PHASE_SITTING_DOWN = 1;
-    public static final int PHASE_RESTING = 2;
-    public static final int PHASE_FALL_SLEEP = 6;   // numbered out of order — added after the fact
-    public static final int PHASE_SLEEPING = 3;
-    public static final int PHASE_WAKING_UP = 4;
-    public static final int PHASE_STANDING_UP = 5;
+    public static final int PHASE_RESTING      = 2;
+    public static final int PHASE_FALL_SLEEP   = 3;   // was 6
+    public static final int PHASE_SLEEPING     = 4;   // was 3
+    public static final int PHASE_WAKING_UP    = 5;   // was 4
+    public static final int PHASE_STANDING_UP  = 6;   // was 5
+
 
     // How long each one-shot transition phase lasts, in ticks (20 ticks = 1 second).
     // These should match the lengths of the corresponding animations.
-    private static final int DOWN_DURATION = 10;
+    private static final int DOWN_DURATION       = 10;
     private static final int FALL_SLEEP_DURATION = 10;
-    private static final int WAKE_UP_DURATION = 10;
-    private static final int STAND_UP_DURATION = 15;
+    private static final int WAKE_UP_DURATION    = 10;
+    private static final int STAND_UP_DURATION   = 15;
 
     // Minimum time the dodo MUST stay in these open-ended phases before
     // it's even allowed to roll for transition. Stops it from immediately
     // standing back up the tick after sitting down.
-    private static final int MIN_REST_DURATION = 100;   // 5 seconds
+    private static final int MIN_REST_DURATION  = 100;   // 5 seconds
     private static final int MIN_SLEEP_DURATION = 200;  // 10 seconds
 
     // Per-tick chance denominators. Each tick we roll random.nextInt(N);
     // if it equals 0, the transition fires. Bigger N = rarer.
-    private static final int CHANCE_START_SITTING = 1200;   // ~1 per minute
-    private static final int CHANCE_START_SLEEPING = 200;   // once min-rest is satisfied
-    private static final int CHANCE_WAKE_UP = 400;          // once min-sleep is satisfied
+    private static final int CHANCE_START_SITTING   = 1200;   // ~1 per minute
+    private static final int CHANCE_START_SLEEPING  = 200;   // once min-rest is satisfied
+    private static final int CHANCE_WAKE_UP         = 400;          // once min-sleep is satisfied
 
 
     // ===========================================================
@@ -135,7 +138,7 @@ public class DodoEntity extends PathfinderMob {
     private int lastHurtTime = 0;
 
 
-    public DodoEntity(EntityType<? extends PathfinderMob> type, Level level) {
+    public DodoEntity(EntityType<? extends Animal> type, Level level) {
         super(type, level);
         // Replace vanilla's look control with ours so we can suppress
         // head tracking during sleep.
@@ -155,6 +158,11 @@ public class DodoEntity extends PathfinderMob {
         return new DodoBodyControl(this);
     }
 
+
+    @Override
+    public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+        return null;
+    }
 
     // ===========================================================
     // SYNCED DATA REGISTRATION
@@ -274,9 +282,9 @@ public class DodoEntity extends PathfinderMob {
     @Override
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));                                                       // don't drown
-        goalSelector.addGoal(1, new PanicGoal(this, 1.6d));                                                 // run when hurt (1.6x speed)
+        goalSelector.addGoal(1, new PanicGoal(this, 1.6d));                                     // run when hurt (1.6x speed)
         goalSelector.addGoal(2, new TemptGoal(this, 1.25d, stack -> stack.is(ItemTags.FISHES), false));     // follow fish
-        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));                               // wander around
+        goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));                    // wander around
         goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5f, 0.2f));                        // glance at nearby players
         goalSelector.addGoal(5, new RandomLookAroundGoal(this));                                            // idle head turning
         super.registerGoals();
@@ -289,7 +297,7 @@ public class DodoEntity extends PathfinderMob {
     // Base stats. MOVEMENT_SPEED interacts with the panic goal multiplier
     // (1.6x) — so panic speed = 0.20 * 1.6 = 0.32.
     public static AttributeSupplier.Builder createDodoAttributes() {
-        return PathfinderMob.createLivingAttributes()
+        return Animal.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10d)
                 .add(Attributes.MOVEMENT_SPEED, 0.20D)
                 .add(Attributes.TEMPT_RANGE, 16d)
@@ -493,6 +501,12 @@ public class DodoEntity extends PathfinderMob {
         this.entityData.set(SLEEP_PHASE_START_TICK, input.getLongOr("SleepPhaseStartTick", 0L));
     }
 
+    //Required to tell the game what Item triggers breeding
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return false;
+    }
+
 
     // ===========================================================
     // PARTICLE EFFECTS
@@ -562,6 +576,7 @@ public class DodoEntity extends PathfinderMob {
     // dodo sounds once we have audio assets.
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
+        if (isInSleepCycle()) return null;
         return SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds().ambientSound().value();
     }
 

@@ -26,12 +26,18 @@ public class ModEntityLootTableProvider extends EntityLootSubProvider {
     @Override
     public void generate() {
         add(ModEntities.DODO.get(),
-                LootTable.lootTable().withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1f))
-                        .add(LootItem.lootTableItem(ModItems.RAW_DODO_MEAT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0, 1))))
-                        .when(LootItemKilledByPlayerCondition.killedByPlayer())));
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1f))
+                                .add(LootItem.lootTableItem(ModItems.RAW_DODO_MEAT)
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 1)))
+                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0, 1))))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .withPool(LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1f))
+                                .add(LootItem.lootTableItem(net.minecraft.world.item.Items.FEATHER)
+                                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(0, 2)))
+                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0, 1))))));
     }
 
     @Override
