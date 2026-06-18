@@ -1,6 +1,5 @@
 package net.vancomb.beforetimeagain;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -12,7 +11,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.vancomb.beforetimeagain.entity.ModEntities;
+import net.vancomb.beforetimeagain.entity.custom.ModEntities;
 import net.vancomb.beforetimeagain.entity.client.DodoModel;
 import net.vancomb.beforetimeagain.entity.client.DodoRenderer;
 import net.vancomb.beforetimeagain.entity.client.ModModelLayerLocations;

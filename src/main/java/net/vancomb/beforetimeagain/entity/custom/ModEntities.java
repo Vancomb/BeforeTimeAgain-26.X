@@ -1,4 +1,4 @@
-package net.vancomb.beforetimeagain.entity;
+package net.vancomb.beforetimeagain.entity.custom;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -8,7 +8,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.vancomb.beforetimeagain.BeforeTimeAgain;
-import net.vancomb.beforetimeagain.entity.custom.DodoEntity;
 
 import java.util.function.Supplier;
 

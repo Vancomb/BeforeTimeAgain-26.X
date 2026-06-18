@@ -10,10 +10,12 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.vancomb.beforetimeagain.block.ModBlocks;
 import net.vancomb.beforetimeagain.creativetab.ModCreativeModeTabs;
-import net.vancomb.beforetimeagain.entity.ModEntities;
+import net.vancomb.beforetimeagain.entity.custom.ModEntities;
 import net.vancomb.beforetimeagain.item.ModItems;
 import net.vancomb.beforetimeagain.particle.ModParticles;
+import net.vancomb.beforetimeagain.sound.ModSounds;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -41,8 +43,10 @@ public class BeforeTimeAgain {
            ============================= */
         ModCreativeModeTabs.register(modEventBus); // creative tab
         ModItems.register(modEventBus);            // items
+        ModBlocks.register(modEventBus);           // blocks
         ModEntities.register(modEventBus);         // entities (mobs)
         ModParticles.register(modEventBus);        // particles
+        ModSounds.register(modEventBus);           // sounds
 
         /* =============================
            EVENT BUS (global game events)
@@ -55,7 +59,7 @@ public class BeforeTimeAgain {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    /** Runs once during mod setup. Good for networking, registries, or early initialization.*/
+
     private void commonSetup(FMLCommonSetupEvent event) {
         // currently empty
     }
@@ -63,7 +67,7 @@ public class BeforeTimeAgain {
     /** Adds items to vanilla creative tabs.This is where you decide where your items show up in inventory.*/
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
-        // Only modify the INGREDIENTS tab
+        // Only modify the INGREDIENTS tab (Example)
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
 
         }

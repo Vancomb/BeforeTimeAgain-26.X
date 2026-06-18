@@ -12,6 +12,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,7 +28,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 import net.vancomb.beforetimeagain.particle.ModParticles;
+import net.vancomb.beforetimeagain.sound.ModSounds;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -159,9 +162,17 @@ public class DodoEntity extends Animal {
     }
 
 
-    @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+    //BREEDABLE
+
+     @Override
+    public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
         return null;
+    }
+
+    @Override
+    public boolean isFood(ItemStack itemStack) {
+        return itemStack.is(Tags.Items.FOODS_RAW_FISH);
+
     }
 
     // ===========================================================
@@ -283,10 +294,10 @@ public class DodoEntity extends Animal {
     protected void registerGoals() {
         goalSelector.addGoal(0, new FloatGoal(this));                                                       // don't drown
         goalSelector.addGoal(1, new PanicGoal(this, 1.6d));                                     // run when hurt (1.6x speed)
-        goalSelector.addGoal(2, new TemptGoal(this, 1.25d, stack -> stack.is(ItemTags.FISHES), false));     // follow fish
+        goalSelector.addGoal(2, new TemptGoal(this, 1.25d, stack -> stack.is(Tags.Items.FOODS_RAW_FISH), false));     // follow fish
         goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1f));                    // wander around
-        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5f, 0.2f));                        // glance at nearby players
-        goalSelector.addGoal(5, new RandomLookAroundGoal(this));                                            // idle head turning
+        goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 5f, 0.2f));    // glance at nearby players
+        goalSelector.addGoal(5, new RandomLookAroundGoal(this));                                             // idle head turning
         super.registerGoals();
     }
 
@@ -366,9 +377,9 @@ public class DodoEntity extends Animal {
             this.setupAnimationStates();
 
             // Steady stream of Z particles every half-second while sleeping.
-            if (getSleepPhase() == PHASE_SLEEPING && this.tickCount % 10 == 0) {
-                spawnSleepParticles();
-            }
+           // if (getSleepPhase() == PHASE_SLEEPING && this.tickCount % 10 == 0) {
+            //    spawnSleepParticles();
+            //}
         }
     }
 
@@ -501,11 +512,6 @@ public class DodoEntity extends Animal {
         this.entityData.set(SLEEP_PHASE_START_TICK, input.getLongOr("SleepPhaseStartTick", 0L));
     }
 
-    //Required to tell the game what Item triggers breeding
-    @Override
-    public boolean isFood(ItemStack itemStack) {
-        return false;
-    }
 
 
     // ===========================================================
@@ -577,12 +583,12 @@ public class DodoEntity extends Animal {
     @Override
     protected @Nullable SoundEvent getAmbientSound() {
         if (isInSleepCycle()) return null;
-        return SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds().ambientSound().value();
+        return ModSounds.DODO_TRILLING.get();
     }
 
     @Override
     protected @Nullable SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.CHICKEN_SOUNDS.get(ChickenSoundVariants.SoundSet.CLASSIC).adultSounds().hurtSound().value();
+        return ModSounds.DODO_STARTLED.get();
     }
 
     @Override

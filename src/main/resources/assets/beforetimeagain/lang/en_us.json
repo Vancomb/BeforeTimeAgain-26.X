@@ -2,12 +2,17 @@
   "item.beforetimeagain.zircon": "Zircon",
   "item.beforetimeagain.raw_zircon": "Raw Zircon",
 
+  "block.beforetimeagain.ancient_sand": "Ancient Sand",
 
   "entity.beforetimeagain.dodo": "Dodo",
+  "block.beforetimeagain.dodo_egg": "Dodo Egg",
   "item.beforetimeagain.dodo_spawn_egg": "Dodo Spawn Egg",
   "item.beforetimeagain.raw_dodo_meat": "Raw Dodo Meat",
   "item.beforetimeagain.cooked_dodo_meat": "Cooked Dodo Meat",
   "item.beforetimeagain.dodo_fossil": "Dodo Fossil",
+  "item.beforetimeagain.fossil": "Fossil",
+
+  "sounds.beforetimeagain.dodo_squawk": "Dodo Squawk",
 
   "creativetab.beforetimeagain.before_time_again": "Before Time Again"
 

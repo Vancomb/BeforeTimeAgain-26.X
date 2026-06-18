@@ -6,7 +6,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.vancomb.beforetimeagain.BeforeTimeAgain;
-import net.vancomb.beforetimeagain.entity.ModEntities;
+import net.vancomb.beforetimeagain.entity.custom.ModEntities;
 import net.vancomb.beforetimeagain.food.ModFoodProperties;
 
 public class ModItems {
@@ -24,6 +24,9 @@ public class ModItems {
     //Find out when he switches from SimpleItem to RegisterItem?
     public static final DeferredItem<Item> DODO_SPAWN_EGG = ITEMS.registerItem ("dodo_spawn_egg",
             properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.DODO.get())));
+
+    public static final DeferredItem<Item> FOSSIL = ITEMS.registerItem("fossil",
+            properties -> new Item(properties));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -6,6 +6,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
 import net.vancomb.beforetimeagain.BeforeTimeAgain;
+import net.vancomb.beforetimeagain.block.ModBlocks;
 import net.vancomb.beforetimeagain.item.ModItems;
 
 public class ModModelProvider extends ModelProvider {
@@ -20,6 +21,14 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.RAW_DODO_MEAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COOKED_DODO_MEAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.DODO_FOSSIL.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.FOSSIL.get(), ModelTemplates.FLAT_ITEM);
+
+        itemModels.generateFlatItem(ModBlocks.DODO_EGG.get().asItem(), ModelTemplates.FLAT_ITEM);
+
+        //Blocks
+        blockModels.createTrivialCube(ModBlocks.ANCIENT_SAND.get());
+
+        blockModels.createNonTemplateModelBlock(ModBlocks.DODO_EGG.get());
 
     }
 }

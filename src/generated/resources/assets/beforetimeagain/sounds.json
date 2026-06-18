@@ -1,0 +1,24 @@
+{
+  "dodo_squawk": {
+    "sounds": [
+      "beforetimeagain:dodo_squawk"
+    ],
+    "subtitle": "sounds.beforetimeagain.dodo_squawk"
+  },
+  "dodo_startled": {
+    "sounds": [
+      "beforetimeagain:dodo_startled"
+    ],
+    "subtitle": "sounds.beforetimeagain.dodo_startled"
+  },
+  "dodo_trilling": {
+    "sounds": [
+      "beforetimeagain:dodo_trilling_1",
+      "beforetimeagain:dodo_trilling_2",
+      "beforetimeagain:dodo_trilling_3",
+      "beforetimeagain:dodo_trilling_4",
+      "beforetimeagain:dodo_trilling_5"
+    ],
+    "subtitle": "sounds.beforetimeagain.dodo_trilling"
+  }
+}

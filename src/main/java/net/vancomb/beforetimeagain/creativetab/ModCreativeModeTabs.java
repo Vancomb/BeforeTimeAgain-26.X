@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.vancomb.beforetimeagain.BeforeTimeAgain;
+import net.vancomb.beforetimeagain.block.ModBlocks;
 import net.vancomb.beforetimeagain.item.ModItems;
 
 import java.util.function.Supplier;
@@ -17,13 +18,25 @@ public class ModCreativeModeTabs {
 
 
     public static final Supplier<CreativeModeTab> BEFORE_TIME_AGAIN_TAB = CREATIVE_MODE_TABS.register("before_time_again_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.DODO_SPAWN_EGG.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.FOSSIL.get()))
                     .title(Component.translatable("creativetab.beforetimeagain.before_time_again"))
                     .displayItems((itemDisplayParameters, output) -> {
-                      output.accept(ModItems.DODO_SPAWN_EGG);
+                      //Blocks
+                      output.accept(ModBlocks.ANCIENT_SAND);
+
+                      //Items
+                      output.accept(ModItems.DODO_FOSSIL);
+                      output.accept(ModItems.FOSSIL);
+
+                      //FoodItems
                       output.accept(ModItems.RAW_DODO_MEAT);
                       output.accept(ModItems.COOKED_DODO_MEAT);
-                      output.accept(ModItems.DODO_FOSSIL);
+
+                      //Eggs
+                      output.accept(ModBlocks.DODO_EGG);
+
+                      //SpawnEggs
+                      output.accept(ModItems.DODO_SPAWN_EGG);
 
 
                     }).build());
